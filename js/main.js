@@ -157,28 +157,39 @@ fillRestaurantsHTML = (restaurants = self.restaurants) => {
  */
 createRestaurantHTML = (restaurant) => {
   const li = document.createElement('li');
+  li.setAttribute('aria-label','Card Represent Information about ${restaurant.name} Restaurant');
+  li.tabIndex = 0
+  
 
   const image = document.createElement('img');
   image.className = 'restaurant-img';
   image.src = DBHelper.imageUrlForRestaurant(restaurant);
-  image.alt = 'Image of ' + restaurant.name + ' restaurant';
+  image.alt = 'Image of ${restaurant.name} restaurant';
+  image.tabIndex = 0
   li.append(image);
 
   const name = document.createElement('h1');
   name.innerHTML = restaurant.name;
+  name.setAttribute('aria-label', 'name of current restaurant is ${restaurant.name}');
+  name.tabIndex = 0
   li.append(name);
 
   const neighborhood = document.createElement('p');
   neighborhood.innerHTML = restaurant.neighborhood;
+  neighborhood.setAttribute('aria-label', '${restaurant.name} neighborhood is ${restaurant.neighborhood}');
+  neighborhood.tabIndex = 0
   li.append(neighborhood);
 
   const address = document.createElement('p');
   address.innerHTML = restaurant.address;
+  address.setAttribute('aria-label', '${restaurant.name} address is ${restaurant.address}');
+  address.tabIndex = 0
   li.append(address);
 
   const more = document.createElement('a');
   more.innerHTML = 'View Details';
   more.href = DBHelper.urlForRestaurant(restaurant);
+  more.setAttribute('aria-label', 'Click Here To See More Information About ${restaurant.name} restaurant');
   li.append(more)
 
   return li
