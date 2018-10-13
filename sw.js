@@ -2,7 +2,8 @@
 const currentCache = 'restaurantsCachev1';
 const urlsToCache = [
   '/',
-  'restaurant.html',
+  '/index.html',
+  '/restaurant.html',
   '/css/styles.css',
   '/data/restaurants.json',
   '/img/1.jpg',
@@ -17,38 +18,32 @@ const urlsToCache = [
   '/img/10.jpg',
   '/js/dbhelper.js',
   '/js/main.js',
-  '/js/restaurant_info.js'
+  '/js/restaurant_info.js',
+  '/js/index.js'
 ];
 
-//Installing Service Worker
 
-self.addEventListener('install', function(event)){
+
+//Installing and Activating Service Worker
+
+self.addEventListener('install', function(event){
+    
+//installs
         event.waitUntil(
-            caches.open(currentCache).then (function(cache){
+            caches.open(currentCache)
+            .then (function(cache){
+                console.log('Opened cache');
                 return cache.addAll(urlsToCache);
         })
     );
 }); 
 
-//Activate Service Worker
-
-self.addEventListener('activate', function(event){
-        event.waitUntil(
-            caches.keys().then(function(cacheNames){
-                return Promise.all(
-                    cacheNames.filter(function(cacheName) {
-                        return cacheName ! = currentCache;
-                    }).map(function(cacheName) {
-                        return caches.delete(cacheName);
-                    })
-                );
-            })
-        );
-});
 
 //Fetching for offline content 
 
 self.addEventListener('fetch', function(event){
+    console.log(event.request.url);
+    
     event.respondWith(
         caches.match(event.request).then(function(response) {
             return response || fetch(event.request);
