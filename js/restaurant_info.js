@@ -89,6 +89,7 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
   const image = document.getElementById('restaurant-img');
   image.className = 'restaurant-img'
   image.src = DBHelper.imageUrlForRestaurant(restaurant);
+  image.alt = `Photo of ${restaurant.name}`;
 
   const cuisine = document.getElementById('restaurant-cuisine');
   cuisine.innerHTML = restaurant.cuisine_type;
@@ -192,3 +193,19 @@ getParameterByName = (name, url) => {
     return '';
   return decodeURIComponent(results[2].replace(/\+/g, ' '));
 }
+
+
+  /**
+   * Register the service worker
+   */
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/cache-sw.js', {scope:'/'})
+    .then(function(registration) {
+      // Registration was successful
+      console.log('Service Worker registered', registration.scope);
+    })
+    .catch(function(err) {
+      // Registration failed
+      console.log('Service Worker registration failed: ', err);
+    });
+  } 
