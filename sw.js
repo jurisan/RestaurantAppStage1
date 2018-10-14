@@ -18,8 +18,7 @@ const urlsToCache = [
   '/img/10.jpg',
   '/js/dbhelper.js',
   '/js/main.js',
-  '/js/restaurant_info.js',
-  '/js/index.js'
+  '/js/restaurant_info.js'
 ];
 
 
