@@ -29,7 +29,7 @@ self.addEventListener('install', function(event){
     
 //installs
         event.waitUntil(
-            caches.open(currentCache)
+            caches.open('restaurantsCachev1')
             .then (function(cache){
                 console.log('Opened cache');
                 return cache.addAll(urlsToCache);
